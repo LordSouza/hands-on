@@ -1,1 +1,13 @@
-<hands-on-nx-welcome></hands-on-nx-welcome> <router-outlet></router-outlet>
+<hands-on-master-page>
+    <div ngProjectAs="header" class="flex justify-content-center">
+        <h1>Header Content</h1>
+    </div>
+
+    <div ngProjectAs="body" class="flex justify-content-center">
+        <h1>Body Content</h1>
+    </div>
+    <div ngProjectAs="footer" class="flex justify-content-center">
+        <h1>Footer Content</h1>
+    </div>
+    <router-outlet ngProjectAs="main" class="bg-amber-500"></router-outlet>
+</hands-on-master-page>

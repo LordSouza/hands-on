@@ -14,7 +14,24 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@events-logger/environment": [
+        "apps/events-logger/src/environment/environment"
+      ],
+      "@hands-on/auth": ["apps/events-logger/src/libs/auth/src/index.ts"],
+      "@hands-on/forms": ["libs/ui/forms/src/index.ts"],
+      "@hands-on/home-page": [
+        "apps/events-logger/src/libs/home-page/src/index.ts"
+      ],
+      "@hands-on/landing-page": [
+        "apps/events-logger/src/libs/landing-page/src/index.ts"
+      ],
+      "@hands-on/master-page": ["libs/ui/master-page/src/index.ts"],
+      "@hands-on/project-page": [
+        "apps/events-logger/src/libs/project-page/src/index.ts"
+      ],
+      "@hands-on/service/auth": ["libs/auth/auth.service.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

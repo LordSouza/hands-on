@@ -1,0 +1,11 @@
+<p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">
+        <ng-content select="header"></ng-content>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-content select="body"></ng-content>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <ng-content select="footer"></ng-content>
+    </ng-template>
+</p-sidebar>

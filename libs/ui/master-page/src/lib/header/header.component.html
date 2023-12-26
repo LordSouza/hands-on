@@ -1,0 +1,62 @@
+<div class="card flex justify-content-center md:flex-row flex-col">
+    <hands-on-sidebar [sidebarVisible]="sidebarVisible">
+        <ng-content ngProjectAs="header" select="header"></ng-content>
+        <ng-content ngProjectAs="body" select="body"></ng-content>
+        <ng-content ngProjectAs="footer" select="footer"></ng-content>
+    </hands-on-sidebar>
+</div>
+
+<header class="text-gray-600 body-font bg-transparent">
+    <div
+        class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+    >
+        @if(isLoginMode){
+        <div class="card flex justify-content-center">
+            <p-sidebar [(visible)]="sidebarVisible">
+                <ng-template pTemplate="header">Header Content</ng-template>
+                <ng-template pTemplate="content">Body Content</ng-template>
+                <ng-template pTemplate="footer">Footer Content</ng-template>
+            </p-sidebar>
+            <p-button (click)="sidebarVisible = true">
+                <mat-icon>menu</mat-icon>
+            </p-button>
+        </div>
+        }
+        <a
+            class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+        >
+            <img src="assets/logo.svg" class="w-10 h-10" />
+            <button (click)="onClickHome()">
+                <span class="ml-3 text-xl">Events Logger</span>
+            </button>
+        </a>
+        <div
+            class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l flex flex-wrap items-center text-base justify-center"
+        ></div>
+        <div class="flex justify-evenly gap-3">
+            @if(!isLoginMode){
+            <div>
+                <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="authRegister()"
+                >
+                    Register
+                </button>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="authLogin()">
+                    Log In
+                </button>
+            </div>
+            } @else {
+            <button mat-raised-button color="warn" (click)="authLogout()">
+                <mat-icon>logout</mat-icon>
+                Log Out
+            </button>
+            }
+        </div>
+    </div>
+</header>
+
+<ng-content></ng-content>

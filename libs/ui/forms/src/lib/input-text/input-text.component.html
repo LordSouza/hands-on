@@ -1,0 +1,16 @@
+<form [formGroup]="form">
+  <label for="text" class="leading-7 text-sm text-gray-600">{{ label }}</label>
+  <input
+    piInputText
+    formControlName="{{ label }}"
+    type="text"
+    id="{{ label }}"
+    [class.border-rose-500.border-2]="
+      form.controls[label].invalid && form.controls[label].touched
+    "
+    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-12"
+  />
+  @if (!form.controls[label].valid && form.controls[label].touched) {
+  <small class="text-rose-500">{{ getErrorMessage() }}</small>
+  }
+</form>

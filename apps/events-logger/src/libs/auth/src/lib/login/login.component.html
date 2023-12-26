@@ -1,0 +1,38 @@
+<p-toast></p-toast>
+<div
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    class="px-5 py-24 flex content-center justify-center flex-wrap w-full h-full"
+>
+    <div
+        class="lg:w-2/6 md:w-auto bg-gray-100 rounded-lg p-8 flex flex-col mt-10 md:mt-0"
+    >
+        <div class="text-center mb-5">
+            <h2 class="text-900 text-3xl font-medium mb-3">Welcome Back</h2>
+            <span class="text-600 font-medium line-height-3"
+                >Don't have an account?</span
+            >
+            <a
+                class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+                routerLink="/auth/register"
+                >Create today!</a
+            >
+        </div>
+
+        <hands-on-input-email class="relative mb-4"></hands-on-input-email>
+
+        <hands-on-input-password
+            class="relative mb-4"
+            label="password"
+        ></hands-on-input-password>
+
+        <button
+            pButton
+            type="submit"
+            (click)="onSubmit()"
+            [loading]="isLoading"
+            class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            label="Log In"
+        ></button>
+    </div>
+</div>

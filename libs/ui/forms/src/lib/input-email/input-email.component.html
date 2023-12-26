@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
+  <input
+    piInputText
+    formControlName="email"
+    placeholder="example@domain.com"
+    type="email"
+    id="email"
+    name="email"
+    [class.border-rose-500.border-2]="
+      form.controls['email'].invalid && form.controls['email'].touched
+    "
+    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out h-12"
+  />
+  @if (!form.controls['email'].valid && form.controls['email'].touched) {
+  <small class="text-rose-500">{{ getErrorMessage() }}</small>
+  }
+</form>
