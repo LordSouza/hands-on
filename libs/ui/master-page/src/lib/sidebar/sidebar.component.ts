@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'hands-on-sidebar',
@@ -7,4 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class SidebarComponent {
     @Input() sidebarVisible: boolean = false;
+    @Output() sidebarVisibleChange: EventEmitter<boolean> =
+        new EventEmitter<boolean>();
+
+    onHide() {
+        this.sidebarVisibleChange.emit(false);
+    }
 }

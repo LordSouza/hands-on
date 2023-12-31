@@ -1,1 +1,32 @@
-<p>entry works!</p>
+<p-fieldset>
+    <ng-template pTemplate="header">
+        <div
+            class="flex items-center shadow-xl gap-2 px-2 border-slate-200 border-2 rounded-lg"
+        >
+            @if (entry.userDTO.photoPath != '') {
+            <p-avatar
+                image="{{ entry.userDTO.photoPath }}"
+                shape="circle"
+                class="pt-1"
+            />
+            } @else {
+            <p-avatar icon="pi pi-user" shape="circle" class="pt-1" />
+            }
+            <p class="font-bold pr-2 border-r-2">{{ entry.userDTO.name }}</p>
+
+            <p class="text-xs text-gray-500">{{ entry.projectDTO.name }}</p>
+        </div>
+    </ng-template>
+
+    <div class="pb-5">
+        <p class="m-0">
+            {{ entry.description }}
+        </p>
+    </div>
+    <!-- TODO: fix this part -->
+    <mat-tab-group class="border-slate-200 border-t-2">
+        @for (tab of tabs; track tab) {
+        <mat-tab label="{{ tab.title }}"> {{ tab.content }} </mat-tab>
+        }
+    </mat-tab-group>
+</p-fieldset>

@@ -1,13 +1,18 @@
 <hands-on-master-page>
-    <div ngProjectAs="header" class="flex justify-content-center">
-        <h1>Header Content</h1>
+    <div ngProjectAs="header">
+        <h1>Events Logger</h1>
     </div>
 
     <div ngProjectAs="body" class="flex justify-content-center">
-        <h1>Body Content</h1>
+        <h1>link</h1>
+        <ul>
+            <li>
+                <button routerLink="/project">Project</button>
+            </li>
+        </ul>
     </div>
     <div ngProjectAs="footer" class="flex justify-content-center">
         <h1>Footer Content</h1>
     </div>
-    <router-outlet ngProjectAs="main" class="bg-amber-500"></router-outlet>
+    <router-outlet ngProjectAs="main" class="w-full"></router-outlet>
 </hands-on-master-page>

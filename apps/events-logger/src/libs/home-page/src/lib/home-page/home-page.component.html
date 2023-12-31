@@ -1,1 +1,8 @@
-<p>home-page works!</p>
+<div class="relative gap-5 flex items-center justify-center flex-col m-auto">
+    @for (entry of entryArray; track entry) {
+
+    <div class="shadow-lg w-1/2">
+        <hands-on-entry [entry]="entry"></hands-on-entry>
+    </div>
+    }
+</div>
