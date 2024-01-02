@@ -8,55 +8,77 @@ import { Entry } from '@models';
 })
 export class EntryComponent implements OnInit {
     @Input() entry: Entry = {} as Entry;
-    images!: {
-        itemImageSrc: string;
-        thumbnailImageSrc: string;
-        alt: string;
+    tabs: {
         title: string;
-    }[];
-    tabs: { title: string; content: string; type: string }[] = [];
-    responsiveOptions: { breakpoint: string; numVisible: number }[] = [];
+        content?: { name: string; url: string }[];
+        type: string;
+    }[] = [];
 
     constructor() {}
 
     ngOnInit() {
         this.tabs = [
-            { title: 'Files', content: 'Tab 1 Content', type: 'doc' },
-            { title: 'Pictures', content: 'Tab 2 Content', type: 'img' },
-            { title: 'Videos', content: 'Tab 3 Content', type: 'video' },
-            { title: 'Download', content: 'Tab 3 Content', type: 'video' },
+            { title: 'Files', content: [], type: 'doc' },
+            { title: 'Pictures', content: [], type: 'img' },
+            { title: 'Videos', content: [], type: 'video' },
+            { title: 'Download', content: [], type: 'all' },
         ];
-        this.images = [
-            {
-                itemImageSrc:
-                    'https://blobstorageeventslogger.blob.core.windows.net/files/0lz3xyqr.fsh_10_11_2023.png',
-                thumbnailImageSrc:
-                    'https://blobstorageeventslogger.blob.core.windows.net/files/0lz3xyqr.fsh_10_11_2023.png',
-                alt: '',
-                title: '',
-            },
-            {
-                itemImageSrc:
-                    'https://blobstorageeventslogger.blob.core.windows.net/files/3oujm4vh.4xq_10_11_2023.png',
-                thumbnailImageSrc:
-                    'https://blobstorageeventslogger.blob.core.windows.net/files/3oujm4vh.4xq_10_11_2023.png',
-                alt: '',
-                title: '',
-            },
-        ];
-        this.responsiveOptions = [
-            {
-                breakpoint: '1024px',
-                numVisible: 5,
-            },
-            {
-                breakpoint: '768px',
-                numVisible: 3,
-            },
-            {
-                breakpoint: '560px',
-                numVisible: 1,
-            },
-        ];
+
+        for (const file in this.entry.filesUrl) {
+            // check if file is a image
+            if (
+                this.entry.filesUrl[file].endsWith('jpg') ||
+                this.entry.filesUrl[file].endsWith('png') ||
+                this.entry.filesUrl[file].endsWith('WebP') ||
+                this.entry.filesUrl[file].endsWith('avif') ||
+                this.entry.filesUrl[file].endsWith('jpeg')
+            ) {
+                this.tabs[1].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+                this.tabs[3].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+            }
+            // check if file is a video
+            else if (
+                this.entry.filesUrl[file].endsWith('mp4') ||
+                this.entry.filesUrl[file].endsWith('mov') ||
+                this.entry.filesUrl[file].endsWith('avi') ||
+                this.entry.filesUrl[file].endsWith('wmv') ||
+                this.entry.filesUrl[file].endsWith('flv') ||
+                this.entry.filesUrl[file].endsWith('webm')
+            ) {
+                this.tabs[2].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+                this.tabs[3].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+            }
+            // check if file is a document
+            else if (
+                this.entry.filesUrl[file].endsWith('pdf') ||
+                this.entry.filesUrl[file].endsWith('doc') ||
+                this.entry.filesUrl[file].endsWith('docx') ||
+                this.entry.filesUrl[file].endsWith('xls') ||
+                this.entry.filesUrl[file].endsWith('xlsx')
+            ) {
+                this.tabs[0].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+                this.tabs[3].content?.push({
+                    name: this.entry.filesUrl[file].split('/')[4],
+                    url: this.entry.filesUrl[file],
+                });
+            } else {
+                continue;
+            }
+        }
     }
 }

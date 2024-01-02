@@ -1,7 +1,13 @@
 <div class="relative gap-5 flex items-center justify-center flex-col m-auto">
+    <hands-on-home-page-controls></hands-on-home-page-controls>
     @for (entry of entryArray; track entry) {
-
-    <div class="shadow-lg w-1/2">
+    <div
+        class="shadow-lg w-full md:w-1/2 lg:w-1/3"
+        infinite-scroll
+        [infiniteScrollDistance]="1"
+        [infiniteScrollThrottle]="1000"
+        (scrolled)="onScroll()"
+    >
         <hands-on-entry [entry]="entry"></hands-on-entry>
     </div>
     }

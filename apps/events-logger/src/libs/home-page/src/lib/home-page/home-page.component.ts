@@ -9,13 +9,47 @@ import { EntryService } from '@services';
     styleUrl: './home-page.component.css',
 })
 export class HomePageComponent implements OnInit {
+    isLoading = false;
+    currentPage = 1;
+    itemsPerPage = 10;
     entryArray: Entry[] = [];
 
     constructor(private entryService: EntryService) {}
 
     ngOnInit(): void {
-        this.entryService.fetchAllEntries().subscribe((entries) => {
-            this.entryArray = entries;
-        });
+        this.loadData();
     }
+
+    toggleLoading = () => (this.isLoading = !this.isLoading);
+
+    // it will be called when this component gets initialized.
+    loadData = () => {
+        this.toggleLoading();
+        this.entryService
+            .fetchAllEntries(this.currentPage, this.itemsPerPage)
+            .subscribe({
+                next: (response) => (this.entryArray = response),
+                error: (err) => console.log(err),
+                complete: () => this.toggleLoading(),
+            });
+    };
+
+    // this method will be called on scrolling the page
+    appendData = () => {
+        this.toggleLoading();
+        this.entryService
+            .fetchAllEntries(this.currentPage, this.itemsPerPage)
+            .subscribe({
+                next: (response) =>
+                    (this.entryArray = [...this.entryArray, ...response]),
+                error: (err) => console.log(err),
+                complete: () => this.toggleLoading(),
+            });
+    };
+
+    onScroll = () => {
+        this.currentPage++;
+        this.appendData();
+        console.log(this.currentPage);
+    };
 }

@@ -31,13 +31,16 @@ export class EntryService {
     //         );
     // }
 
-    fetchAllEntries() {
+    fetchAllEntries(page: number, limit: number) {
         return this.http
-            .get<ResponseData>(`${environment.url}/Entry`, {
-                headers: new HttpHeaders({
-                    Accept: 'application/json',
-                }),
-            })
+            .get<ResponseData>(
+                `${environment.url}/Entry?pageNumber=${page}&pageSize=${limit}`,
+                {
+                    headers: new HttpHeaders({
+                        Accept: 'application/json',
+                    }),
+                }
+            )
             .pipe(
                 map((responseData: any) => {
                     const entryArray: Entry[] = [];
