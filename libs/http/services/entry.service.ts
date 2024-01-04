@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpParams } from '@angular/common/http';
 
 import { Subject, map, catchError, throwError, tap } from 'rxjs';
 
 import { environment } from '../../../apps/events-logger/src/environment/environment';
-import { Entry, ResponseData, Project, User } from '../models/index';
+import { Entry, ResponseData, Project } from '../models/index';
 
 @Injectable({
     providedIn: 'root',
@@ -14,33 +14,68 @@ export class EntryService {
 
     constructor(private http: HttpClient) {}
 
-    // postEntry(name: string, address: Address) {
-    //     const postData: Entry = { name: name, address: address };
+    postEntry(projectId: string, description: string, file: File) {
+        const formData: FormData = new FormData();
+        formData.append('projectid', projectId);
+        formData.append('Description', description);
+        const blob = new Blob([file]);
+        formData.append('Files', blob, file.name);
 
-    //     this.http
-    //         .post<ResponseData>(`${environment.url}/Project`, postData, {
-    //             observe: 'response',
-    //         })
-    //         .subscribe(
-    //             (responseData) => {
-    //                 console.log(responseData.body?.messages);
-    //             },
-    //             (error) => {
-    //                 this.error.next(error.message);
-    //             }
-    //         );
-    // }
-
-    fetchAllEntries(page: number, limit: number) {
-        return this.http
-            .get<ResponseData>(
-                `${environment.url}/Entry?pageNumber=${page}&pageSize=${limit}`,
-                {
-                    headers: new HttpHeaders({
-                        Accept: 'application/json',
-                    }),
+        this.http
+            .post<ResponseData>(`${environment.url}/Entry`, formData, {
+                observe: 'response',
+                // headers: { 'Content-Type': 'multipart/form-data' },
+            })
+            .subscribe(
+                (responseData) => {
+                    console.log(responseData.body?.messages);
+                },
+                (error) => {
+                    this.error.next(error);
                 }
-            )
+            );
+    }
+
+    fetchAllEntries(
+        page: number,
+        limit: number,
+        userid?: string,
+        projectid?: string,
+        description?: string,
+        hasfiles?: boolean
+    ) {
+        const list: { name: string; value: any | undefined }[] = [
+            {
+                name: 'userid',
+                value: userid,
+            },
+            {
+                name: 'projectid',
+                value: projectid,
+            },
+            {
+                name: 'entrydescription',
+                value: description,
+            },
+            {
+                name: 'hasfiles',
+                value: hasfiles,
+            },
+        ];
+        let paramSet = new HttpParams()
+            .set('pageNumber', page)
+            .set('pageSize', limit);
+
+        for (const item of list) {
+            if (item.value !== undefined) {
+                paramSet = paramSet.set(item.name, item.value);
+            }
+        }
+
+        return this.http
+            .get<ResponseData>(`${environment.url}/Entry`, {
+                params: paramSet,
+            })
             .pipe(
                 map((responseData: any) => {
                     const entryArray: Entry[] = [];

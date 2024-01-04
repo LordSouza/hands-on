@@ -1,10 +1,46 @@
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen"
+>
+    <hands-on-create-entry [(isOpen)]="isOpen"></hands-on-create-entry
+></ng-template>
 <div class="relative gap-5 flex items-center justify-center flex-col m-auto">
-    <hands-on-home-page-controls></hands-on-home-page-controls>
-    @for (entry of entryArray; track entry) {
+    <div class="w-1/2">
+        <div class="flex flex-row-reverse gap-5">
+            <button mat-raised-button color="primary" (click)="onReset()">
+                Reset
+            </button>
+
+            <button
+                mat-raised-button
+                color="primary"
+                (click)="isFilter = !isFilter"
+            >
+                Filter
+            </button>
+
+            <button
+                cdkOverlayOrigin
+                #trigger="cdkOverlayOrigin"
+                mat-raised-button
+                color="primary"
+                (click)="isOpen = !isOpen"
+            >
+                New
+            </button>
+        </div>
+    </div>
+    @if (isFilter) {
+    <hands-on-home-page-controls
+        (filter)="onFilter($event)"
+        [entryArray]="entryArray"
+    ></hands-on-home-page-controls>
+    } @for (entry of entryArray; track entry) {
     <div
         class="shadow-lg w-full md:w-1/2 lg:w-1/3"
         infinite-scroll
-        [infiniteScrollDistance]="1"
+        [infiniteScrollDistance]="2"
         [infiniteScrollThrottle]="1000"
         (scrolled)="onScroll()"
     >

@@ -7,7 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MasterPageModule } from '@hands-on/master-page';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from '@hands-on/service/auth';
-import { EntryService } from '@services';
+import { EntryService, ProjectsService } from '@services';
 import { AuthInterceptor } from '@hands-on/service/interceptor';
 
 @NgModule({
@@ -22,6 +22,7 @@ import { AuthInterceptor } from '@hands-on/service/interceptor';
     providers: [
         AuthService,
         EntryService,
+        ProjectsService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,

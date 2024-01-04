@@ -1,0 +1,61 @@
+<div
+    class="fixed top-0 left-0 w-full h-full z-40 bg-black bg-opacity-30 overscroll-none flex justify-center place-items-center"
+>
+    <div class="fixed p-4 bg-white z-50 rounded-xl">
+        <form class="flex gap-5" [formGroup]="formEntry">
+            <div>
+                <mat-form-field>
+                    <mat-label>Projects</mat-label>
+                    <mat-select formControlName="selectedProject">
+                        @for (projectName of projectsNames; track projectName) {
+                        <mat-option [value]="projectName.id">{{
+                            projectName.name
+                        }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <br />
+                <mat-form-field>
+                    <mat-label>Description</mat-label>
+                    <textarea
+                        matInput
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5"
+                        formControlName="description"
+                    ></textarea></mat-form-field
+                ><!-- select files -->
+                <div>
+                    <label>Choose </label>
+                    <input
+                        multiple
+                        formControlName="files"
+                        type="file"
+                        #filePicker
+                        (change)="onUpload($event)"
+                    />
+                </div>
+
+                <button
+                    mat-raised-button
+                    type="button"
+                    color="warn"
+                    (click)="close()"
+                >
+                    <mat-icon>close</mat-icon>
+                    Close
+                </button>
+
+                <button
+                    mat-raised-button
+                    type="submit"
+                    color="primary"
+                    (click)="createEntry()"
+                >
+                    <mat-icon>send</mat-icon>
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
