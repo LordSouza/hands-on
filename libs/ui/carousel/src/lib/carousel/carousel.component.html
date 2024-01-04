@@ -1,0 +1,51 @@
+<div class="relative h-full">
+    <div class="flex justify-center h-96 pb-3">
+        @if (typeContent === 'img') {
+
+        <img
+            src="{{ contentSelected.url }}"
+            class="h-full w-full aspect-auto object-contain"
+            alt="Image"
+        />
+        } @else if (typeContent === 'video') {
+        <video
+            class="h-full w-full aspect-auto object-contain"
+            alt="Video"
+            controls
+        >
+            <source src="{{ contentSelected.url }}" type="video/mp4" />
+        </video>
+        } @else {
+        <p class="text-center text-2xl">No content</p>
+        }
+    </div>
+
+    @if (tab.content !== undefined && tab.content.length > 1) {
+
+    <button
+        class="cursor-pointer absolute top-1/2 w-auto -mt-5 p-2 rounded-full hover:bg-black hover:bg-opacity-10 transition-colors duration-300"
+        (click)="privImg()"
+    >
+        <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button
+        class="cursor-pointer absolute top-1/2 w-auto -mt-5 p-2 right-0 rounded-full hover:bg-black hover:bg-opacity-10 transition-colors duration-300"
+        (click)="nextImg()"
+    >
+        <mat-icon>navigate_next</mat-icon>
+    </button>
+
+    <div class="flex justify-center gap-3">
+        @for (item of tab.content; track item) {
+        <button
+            (click)="selectImg(item)"
+            [ngClass]="{
+                'bg-slate-500': contentSelected.name === item.name,
+                'bg-slate-300': contentSelected.name !== item.name
+            }"
+            class="rounded-full bg-slate-500 inline-block bg-opacity-70 h-3 w-3 transition-colors duration-300 hover:bg-opacity-100"
+        ></button>
+        }
+    </div>
+    }
+</div>

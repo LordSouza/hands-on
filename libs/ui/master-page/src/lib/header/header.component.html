@@ -1,26 +1,27 @@
-<div class="card flex justify-content-center md:flex-row flex-col">
-    <hands-on-sidebar [sidebarVisible]="sidebarVisible">
-        <ng-content ngProjectAs="header" select="header"></ng-content>
-        <ng-content ngProjectAs="body" select="body"></ng-content>
-        <ng-content ngProjectAs="footer" select="footer"></ng-content>
-    </hands-on-sidebar>
+@if(isLoginMode){
+<div class="card flex justify-content-center">
+    <hands-on-sidebar [(sidebarVisible)]="sidebarVisible">
+        <div ngProjectAs="header">
+            <ng-content select="header"> </ng-content>
+        </div>
+        <div ngProjectAs="body">
+            <ng-content select="body"> </ng-content>
+        </div>
+        <div ngProjectAs="footer">
+            <ng-content select="footer"> </ng-content></div
+    ></hands-on-sidebar>
 </div>
-
-<header class="text-gray-600 body-font bg-transparent">
+}
+<header
+    class="text-gray-600 body-font bg-gradient-to-b from-slate-400 via-transparent"
+>
     <div
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
     >
         @if(isLoginMode){
-        <div class="card flex justify-content-center">
-            <p-sidebar [(visible)]="sidebarVisible">
-                <ng-template pTemplate="header">Header Content</ng-template>
-                <ng-template pTemplate="content">Body Content</ng-template>
-                <ng-template pTemplate="footer">Footer Content</ng-template>
-            </p-sidebar>
-            <p-button (click)="sidebarVisible = true">
-                <mat-icon>menu</mat-icon>
-            </p-button>
-        </div>
+        <p-button (click)="sidebarVisible = !sidebarVisible">
+            <mat-icon>menu</mat-icon>
+        </p-button>
         }
         <a
             class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"

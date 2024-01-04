@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
                 this.showSuccess('Login Successful');
                 this.isLoading = false;
                 this.router.navigate(['/home'], {});
+                this.loginForm.reset();
             },
             (errorMessage) => {
                 this.showError(errorMessage.error.messages[0]);
@@ -61,8 +62,6 @@ export class LoginComponent implements OnInit {
                 this.isLoading = false;
             }
         );
-
-        this.loginForm.reset();
     }
 
     showSuccess(Message: string) {
