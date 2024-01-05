@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+<div
+    [formGroup]="signupForm"
+    (ngSubmit)="onSubmit()"
+    class="px-5 py-24 flex content-center justify-center flex-wrap w-full h-full"
+>
+    <div
+        class="lg:w-2/6 md:w-auto shadow-xl bg-white rounded-lg p-8 flex flex-col mt-10 md:mt-0"
+    >
+        <div class="text-center mb-5">
+            <h2 class="text-900 text-3xl font-medium mb-3">Welcome</h2>
+            <span class="text-600 font-medium line-height-3"
+                >Already have an account?</span
+            >
+            <a
+                class="font-medium no-underline ml-2 text-blue-500 cursor-pointer"
+                routerLink="/auth/login"
+                >Login</a
+            >
+        </div>
+        <div class="flex w-full gap-1">
+            <hands-on-input-text
+                class="relative mb-4 flex-none w-1/2"
+                label="firstname"
+            ></hands-on-input-text>
+
+            <hands-on-input-text
+                class="relative mb-4 flex-none w-1/2"
+                label="lastname"
+            ></hands-on-input-text>
+        </div>
+
+        <hands-on-input-text
+            class="relative mb-4"
+            label="username"
+        ></hands-on-input-text>
+
+        <hands-on-input-email class="relative mb-4"></hands-on-input-email>
+
+        <hands-on-input-password
+            class="relative mb-4"
+            label="password"
+        ></hands-on-input-password>
+
+        <button
+            pButton
+            type="submit"
+            (click)="onSubmit()"
+            [loading]="isLoading"
+            class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            label="Register"
+        ></button>
+    </div>
+</div>

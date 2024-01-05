@@ -3,12 +3,33 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MasterPageModule } from '@hands-on/master-page';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from '@hands-on/service/auth';
+import { EntryService, ProjectsService, ProjectsUserService } from '@services';
+import { AuthInterceptor } from '@hands-on/service/interceptor';
 
 @NgModule({
-  declarations: [AppComponent, NxWelcomeComponent],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MasterPageModule,
+    ],
+    providers: [
+        AuthService,
+        EntryService,
+        ProjectsService,
+        ProjectsUserService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

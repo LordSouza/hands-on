@@ -1,0 +1,14 @@
+<button mat-fab extended color="primary" (click)="onCreateProject()">
+    <mat-icon>add</mat-icon>
+    Create
+</button>
+<br />
+
+<hands-on-table
+    [type]="type"
+    [columns]="columns"
+    [dataSource]="dataSource"
+    route="projects"
+    class="w-full"
+>
+</hands-on-table>

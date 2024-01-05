@@ -1,1 +1,18 @@
-<hands-on-nx-welcome></hands-on-nx-welcome> <router-outlet></router-outlet>
+<hands-on-master-page>
+    <div ngProjectAs="header">
+        <h1>Events Logger</h1>
+    </div>
+
+    <div ngProjectAs="body" class="flex justify-content-center">
+        <ul>
+            <li>
+                <button routerLink="/home">Home</button>
+            </li>
+            <li>
+                <button routerLink="/projects">Project</button>
+            </li>
+        </ul>
+    </div>
+
+    <router-outlet ngProjectAs="main" class="w-full"></router-outlet>
+</hands-on-master-page>

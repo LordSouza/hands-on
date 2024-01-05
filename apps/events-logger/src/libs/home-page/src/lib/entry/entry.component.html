@@ -1,0 +1,111 @@
+<p-fieldset>
+    <ng-template pTemplate="header">
+        <div
+            class="flex items-center shadow-xl gap-2 px-2 border-slate-200 border-2 rounded-lg"
+        >
+            @if (entry.userDTO.photoPath != '') {
+            <p-avatar
+                image="{{ entry.userDTO.photoPath }}"
+                shape="circle"
+                class="pt-1"
+            />
+            } @else {
+            <p-avatar icon="pi pi-user" shape="circle" class="pt-1" />
+            }
+            <p class="font-bold pr-2 border-r-2">{{ entry.userDTO.name }}</p>
+
+            <p class="text-xs text-gray-500">{{ entry.projectDTO.name }}</p>
+        </div>
+    </ng-template>
+
+    <div class="pb-5">
+        <p class="m-0">
+            {{ entry.description }}
+        </p>
+    </div>
+
+    <mat-tab-group class="border-slate-200 border-t-2 transition-all">
+        @for (tab of tabs; track tab) { @if (tab.type == 'all' &&
+        tab.content?.length) {
+        <mat-tab label="{{ tab.title }}">
+            <mat-list>
+                @for (file of tab.content; track file) {
+                <mat-list-item>
+                    <div class="w-full justify-between">
+                        <a
+                            mat-button
+                            color="primary"
+                            href="{{ file.url }}"
+                            download="{{ file.url }}"
+                        >
+                            <mat-icon>download</mat-icon>
+                            {{ file.name }}
+                        </a>
+                    </div>
+                </mat-list-item>
+                }
+            </mat-list>
+        </mat-tab>
+        } @else if (tab.type == 'img' && tab.content?.length ) {
+
+        <mat-tab label="{{ tab.title }}">
+            <hands-on-carousel
+                [tab]="tab"
+                typeContent="img"
+            ></hands-on-carousel>
+        </mat-tab>
+
+        } @else if (tab.type == 'video' && tab.content?.length ) {
+
+        <mat-tab label="{{ tab.title }}">
+            <hands-on-carousel
+                [tab]="tab"
+                typeContent="video"
+            ></hands-on-carousel>
+        </mat-tab>
+
+        } @else if (tab.type == 'doc' && tab.content?.length) {
+        <mat-tab label="{{ tab.title }}">
+            <div class="gap-1 justify-items-center content-center">
+                @for (file of tab.content; track file) {
+                <mat-card>
+                    @if (file.name.endsWith('pdf')) {
+                    <mat-card-header>
+                        <img
+                            mat-card-avatar
+                            alt="pdf-image"
+                            src="assets\icon-pdf.png"
+                        />
+                        <mat-card-title>{{ file.name }}</mat-card-title>
+                    </mat-card-header>
+                    } @else if (file.name.endsWith('docx') ||
+                    file.name.endsWith('doc')) {
+                    <mat-card-header>
+                        <img
+                            mat-card-avatar
+                            src="assets\icons-docs.svg"
+                            alt="excel-image"
+                        />
+                        <mat-card-title>{{ file.name }}</mat-card-title>
+                    </mat-card-header>
+                    } @else if (file.name.endsWith('xlsx') ||
+                    file.name.endsWith('xls')) {
+                    <mat-card-header>
+                        <img
+                            mat-card-avatar
+                            src="assets\icon-excel.svg"
+                            alt="docs-image"
+                        />
+                        <mat-card-title>{{ file.name }}</mat-card-title>
+                    </mat-card-header>
+                    } @else {
+                    <p>File not suported</p>
+                    }
+                </mat-card>
+
+                }
+            </div>
+        </mat-tab>
+        } }
+    </mat-tab-group>
+</p-fieldset>

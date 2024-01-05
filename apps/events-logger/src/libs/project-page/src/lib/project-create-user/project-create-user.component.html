@@ -1,0 +1,87 @@
+<form [formGroup]="createUserForm">
+    <mat-form-field>
+        <mat-label for="firstname">First Name</mat-label>
+        <input
+            matInput
+            type="text"
+            id="firstname"
+            formControlName="firstname"
+            class="form-control"
+        />
+        @if (!createUserForm.controls['firstname'].valid &&
+        createUserForm.controls['firstname'].touched) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label for="lastname">Last Name</mat-label>
+        <input
+            matInput
+            type="text"
+            id="lastname"
+            formControlName="lastname"
+            class="form-control"
+        />
+        @if (!createUserForm.controls['lastname'].valid &&
+        createUserForm.controls['lastname'].touched) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label for="username">Username</mat-label>
+        <input
+            matInput
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control"
+        />
+        <mat-hint>optional</mat-hint>
+
+        @if (!createUserForm.controls['username'].valid &&
+        createUserForm.controls['username'].touched) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Enter your email</mat-label>
+        <input
+            matInput
+            placeholder="example@email.com"
+            formControlName="email"
+        />
+        @if (!createUserForm.controls['email'].valid &&
+        createUserForm.controls['email'].touched) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" name="role">
+            @for (role of roles; track role) {
+            <mat-option [value]="role">{{ role }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <span>Choose file</span>
+        <span>{{ photo ? photo.name : 'or drag and drop file here' }}</span>
+        <input type="file" #filePicker (change)="onPhotoPicked($event)" />
+    </div>
+    <br />
+    <button type="button" (click)="onCancel()" mat-raised-button color="warn">
+        Cancel
+    </button>
+    <button
+        type="submit"
+        (click)="onSubmit()"
+        mat-raised-button
+        color="primary"
+    >
+        Register
+    </button>
+</form>

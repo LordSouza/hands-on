@@ -1,0 +1,21 @@
+<mat-form-field>
+    <mat-label>Select Role</mat-label>
+    <mat-select [(ngModel)]="role">
+        @for (role of roles; track role) {
+        <mat-option [value]="role">{{ role }}</mat-option>
+        }
+    </mat-select>
+</mat-form-field>
+<button mat-fab extended color="primary" (click)="onAddUser()">
+    <mat-icon>add</mat-icon>
+    Add User
+</button>
+<hands-on-table
+    [type]="type"
+    [columns]="columns"
+    [dataSource]="dataSource"
+    route="user"
+    class="w-full"
+    (selectedRow)="onSelectUser($event)"
+>
+</hands-on-table>

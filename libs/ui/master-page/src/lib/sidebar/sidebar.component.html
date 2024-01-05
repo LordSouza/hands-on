@@ -1,0 +1,28 @@
+<p-sidebar
+    [(visible)]="sidebarVisible"
+    (onHide)="onHide()"
+    [showCloseIcon]="false"
+>
+    <ng-template pTemplate="header">
+        <div class="flex justify-between w-full h-full">
+            <ng-content select="header"> </ng-content>
+
+            <div>
+                <button
+                    mat-icon-button
+                    color="basic"
+                    (click)="onHide()"
+                    [disableRipple]="true"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <ng-content select="body"></ng-content>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <ng-content select="footer"></ng-content>
+    </ng-template>
+</p-sidebar>
