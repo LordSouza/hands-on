@@ -1,0 +1,82 @@
+<form
+    [formGroup]="createProjectForm"
+    (ngSubmit)="onSubmit()"
+    class="gap-2 flex items-center"
+>
+    <mat-form-field>
+        <mat-label>Name of the Project</mat-label>
+        <input matInput formControlName="name" />
+        @if (!createProjectForm.controls['name'].valid &&
+        createProjectForm.controls['name'].touched) {
+        <mat-error>{{ getErrorMessage() }}</mat-error>
+        }
+    </mat-form-field>
+    <br />
+    <div formGroupName="address">
+        <mat-form-field>
+            <mat-label>Street</mat-label>
+            <input matInput id="street" formControlName="street" />
+
+            @if (!createProjectForm.controls['address'].valid &&
+            createProjectForm.controls['address'].touched) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+            }
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput id="city" formControlName="city" />
+
+            @if (!createProjectForm.controls['address'].valid &&
+            createProjectForm.controls['address'].touched) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+            }
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+            <mat-label>State</mat-label>
+            <input matInput id="state" formControlName="state" />
+
+            @if (!createProjectForm.controls['address'].valid &&
+            createProjectForm.controls['address'].touched) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+            }
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+            <mat-label>Zipcode</mat-label>
+            <input matInput id="zipcode" formControlName="zipcode" />
+
+            @if (!createProjectForm.controls['address'].valid &&
+            createProjectForm.controls['address'].touched) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+            }
+        </mat-form-field>
+        <br />
+
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input matInput id="country" formControlName="country" />
+
+            @if (!createProjectForm.controls['address'].valid &&
+            createProjectForm.controls['address'].touched) {
+            <mat-error>{{ getErrorMessage() }}</mat-error>
+            }
+        </mat-form-field>
+    </div>
+    <br />
+    <button type="button" (click)="onCancel()" mat-raised-button color="warn">
+        Cancel
+    </button>
+    <button
+        type="submit"
+        (click)="onSubmit()"
+        mat-raised-button
+        color="primary"
+    >
+        Create
+    </button>
+</form>

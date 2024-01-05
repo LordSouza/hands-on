@@ -35,6 +35,7 @@
             "@hands-on/service/interceptor": [
                 "libs/auth/auth-interceptor.interceptor.ts"
             ],
+            "@hands-on/table": ["libs/ui/table/src/index.ts"],
             "@models": ["libs/http/models/index.ts"],
             "@services": ["libs/http/services/index.ts"]
         }

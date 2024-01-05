@@ -1,1 +1,56 @@
-<p>project-element works!</p>
+<div>
+    <button (click)="onback()">
+        <mat-icon>arrow_back_ios</mat-icon>
+    </button>
+
+    <div>
+        <mat-icon> foundation </mat-icon>
+        <h1>{{ project.name }}</h1>
+
+        <br />
+        <p>Created at {{ project.createdDate | date }}</p>
+    </div>
+    <div>
+        <!-- TODO try to make a map to render the address -->
+        <p>{{ project.address.street }}</p>
+        <p>{{ project.address.city }}</p>
+        <p>{{ project.address.state }}</p>
+        <p>{{ project.address.country }}</p>
+        <p>{{ project.address.zipCode }}</p>
+    </div>
+    <div>
+        <button mat-fab extended color="warn" (click)="onDelete()">
+            <mat-icon>delete</mat-icon>
+            Delete
+        </button>
+        <button mat-fab extended color="primary" (click)="onAddUser()">
+            <mat-icon>add</mat-icon>
+            Add User
+        </button>
+        <button mat-fab extended color="primary" (click)="onCreateUser()">
+            <mat-icon>add</mat-icon>
+            Create User
+        </button>
+    </div>
+</div>
+<div class="columns-2 gap-4 flex">
+    @if (addUser){
+    <div class="flex-auto w-64">
+        <hands-on-project-add-user
+            data="dataSource.data"
+            (dataParent)="onAddUpdateUser()"
+        >
+        </hands-on-project-add-user>
+    </div>
+    } @else if (createUser) {
+    <div class="flex-auto w-64">
+        <hands-on-project-create-user
+            projectId="{{ project.id }}"
+        ></hands-on-project-create-user>
+    </div>
+    } @else {
+    <div class="flex-auto w-64">
+        <hands-on-user-list [data]="dataSource.data"> </hands-on-user-list>
+    </div>
+    }
+</div>
