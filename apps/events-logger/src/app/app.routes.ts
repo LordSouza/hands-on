@@ -16,6 +16,11 @@ export const appRoutes: Route[] = [
             import('@hands-on/home-page').then((m) => m.HomePageModule),
     },
     {
+        path: 'projects',
+        loadChildren: () =>
+            import('@hands-on/project-page').then((m) => m.ProjectPageModule),
+    },
+    {
         path: '**',
         redirectTo: '/',
     },
